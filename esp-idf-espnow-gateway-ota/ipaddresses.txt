@@ -1,5 +1,0 @@
-FOR /L %i IN (7,1,100) DO arp-ping -n 1 10.196.15.%i | FIND /i "Reply">>C:\ipaddresses.txt
-02-81-b8-2b-aa-75
-
-
-https://www.konwerter.net/
