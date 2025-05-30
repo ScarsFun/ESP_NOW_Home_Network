@@ -1,0 +1,5 @@
+key,type,encoding,value
+storage,namespace,,
+my_node_id,data,string,"NOD001"
+board_type,data,string,"S2 Lolin"
+

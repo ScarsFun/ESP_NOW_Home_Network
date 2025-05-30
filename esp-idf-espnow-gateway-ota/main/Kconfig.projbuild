@@ -1,0 +1,73 @@
+menu "Application Configuration"
+
+	orsource "$IDF_PATH/examples/common_components/env_caps/$IDF_TARGET/Kconfig.env_caps"
+
+	config STA_WIFI_SSID
+		string "WiFi SSID of STA mode"
+		default "TIM-17919151"
+		help
+			SSID (network name) for to connect to.
+
+	config STA_WIFI_PASS
+		string "WiFi Password of STA mode"
+		default "condominiotx"
+		help
+			WiFi password (WPA or WPA2) to use.
+
+	config STA_MAXIMUM_RETRY
+		int "Maximum retry"
+		default 5
+		help
+			Set the Maximum retry to avoid station reconnecting to the AP unlimited when the AP is really inexistent.
+
+	config MQTT_BROKER
+		string "MQTT Broker"
+		default "broker.emqx.io"
+		help
+			Host name or IP address of the broker to connect to
+
+	config ESPNOW_ENABLE_LONG_RANGE
+		bool "Enable Long Range"
+		default "n"
+		help
+			When enable long range, the PHY rate of ESP32 will be 512Kbps or 256Kbps
+
+	config ESP_NOW_PMK
+		string "ESP-NOW private key"
+		default "PMK1233443433245"
+		help
+			must match in nodes configuration
+
+	config ESP_MQTT_CLIENT_SUBSCRIBE
+		string "ESP mqtt client subscribe string"
+		default "/ESP32/RX/#"
+		help
+			esp gateway must subcribe to all messages ending with /#
+			to subscribe all frames for esp nodes.
+
+	config PARSE_TOPIC_KEY
+		string "MQTT key in topic to parse node name"
+		default "RX"
+		help
+			key string to parse node name in MQTT topic received from server 
+		
+	config BLINK_GPIO
+        int "Blink GPIO number"
+        range ENV_GPIO_RANGE_MIN ENV_GPIO_OUT_RANGE_MAX
+        default 8 if IDF_TARGET_ESP32C3 || IDF_TARGET_ESP32H2 || IDF_TARGET_ESP32C2
+        default 18 if IDF_TARGET_ESP32S2
+        default 48 if IDF_TARGET_ESP32S3
+        default 5
+        help
+            GPIO number (IOxx) to blink on and off or the RMT signal for the addressable LED.
+            Some GPIOs are used for other purposes (flash connections, etc.) and cannot be used to blink.
+    
+    config SNTP_TIME_SYNC
+		bool "enable SNTP time sync functions"
+		default "n"
+		help            
+    		enable SNTP time sync.
+    		Implemeted for future use. No needed by gateway app.
+
+    	
+endmenu
