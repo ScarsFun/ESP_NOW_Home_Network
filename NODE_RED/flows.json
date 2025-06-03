@@ -1,0 +1,1332 @@
+[
+    {
+        "id": "bd07650f76cfb00f",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": true,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "be62b38a1606f23a",
+        "type": "tab",
+        "label": "Flow 2",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "1f129b04f6a21947",
+        "type": "group",
+        "z": "be62b38a1606f23a",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#a4a4a4"
+        },
+        "nodes": [
+            "c9d6b8675f2c70fe",
+            "44fa8f3bd01050dc",
+            "5d3c6c3f47ab9f0f",
+            "7a197ce2bc6b30ee",
+            "0ff5ca0a7bbe5edc",
+            "e88a2abb2984a685",
+            "e74909f69cdea0e1",
+            "d35387b34f9f21cc",
+            "bc946ddfb8fd9e29",
+            "06f82ba789799bf3",
+            "6584e47bf7f1e642",
+            "c7624a1bc912cfc9",
+            "73284098740a52c0",
+            "9dcd5867667d2e64",
+            "9e8ff1662a84e827"
+        ],
+        "x": 14,
+        "y": 59,
+        "w": 832,
+        "h": 442
+    },
+    {
+        "id": "f2a0ac1a3b240371",
+        "type": "group",
+        "z": "be62b38a1606f23a",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#a4a4a4"
+        },
+        "nodes": [
+            "73b2223329d4016b",
+            "d1450e715af3b928",
+            "1ba43b3caa01d864",
+            "e6bc2384f23632b3",
+            "2f3e2d3520365ae3",
+            "371c45a35d21c756",
+            "5d7bd062eb091aae",
+            "a1b51c6d2c884a5c",
+            "a441fccff3e1f4f2",
+            "83edbce8cc15d51c",
+            "b06c491dc1cf6a1d",
+            "169f61cd75d29b7c",
+            "19dcb708cae0a28e",
+            "695ee2363d650122"
+        ],
+        "x": 14,
+        "y": 579,
+        "w": 832,
+        "h": 502
+    },
+    {
+        "id": "04667a11efb39498",
+        "type": "mqtt-broker",
+        "name": "MOSQUITTO_Local",
+        "broker": "localhost",
+        "port": "1883",
+        "tls": "",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "bd99c6aad9b7fa01",
+        "type": "ui_group",
+        "name": "NODE001",
+        "tab": "c0122772da8b2172",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "c0122772da8b2172",
+        "type": "ui_tab",
+        "name": "CONTROLS",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "45dd323bd12d407a",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-dark",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#0094CE",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#097479",
+                "baseFont": "Arial,Arial,Helvetica,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#4B7930",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#097479",
+                    "value": "#097479",
+                    "edited": false
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#097479",
+                    "edited": false
+                },
+                "page-backgroundColor": {
+                    "value": "#111111",
+                    "edited": false
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#333333",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#0eb8c0",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#555555",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#333333",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#eeeeee",
+                    "edited": false
+                },
+                "widget-backgroundColor": {
+                    "value": "#097479",
+                    "edited": false
+                },
+                "widget-borderColor": {
+                    "value": "#333333",
+                    "edited": false
+                },
+                "base-font": {
+                    "value": "Arial,Arial,Helvetica,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey",
+                "palette": "light"
+            }
+        },
+        "site": {
+            "name": "Node-RED Dashboard",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "lockMenu": "false",
+            "allowTempTheme": "true",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 40,
+                "sy": 24,
+                "gx": 6,
+                "gy": 6,
+                "cx": 1,
+                "cy": 2,
+                "px": 0,
+                "py": 0
+            }
+        }
+    },
+    {
+        "id": "62122f01a2388250",
+        "type": "ui_group",
+        "name": "NODE002",
+        "tab": "c0122772da8b2172",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "7e830f4821dc86a5",
+        "type": "mqtt in",
+        "z": "bd07650f76cfb00f",
+        "name": "",
+        "topic": "/ESP32/TX/NOD001",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "04667a11efb39498",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 250,
+        "y": 220,
+        "wires": [
+            [
+                "817192abb64b3bfb"
+            ]
+        ]
+    },
+    {
+        "id": "817192abb64b3bfb",
+        "type": "debug",
+        "z": "bd07650f76cfb00f",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 460,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "eb8f71708d7b442f",
+        "type": "mqtt out",
+        "z": "bd07650f76cfb00f",
+        "name": "",
+        "topic": "/ESP32/RX/NOD001",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "04667a11efb39498",
+        "x": 500,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "e378de1eb1a2389a",
+        "type": "inject",
+        "z": "bd07650f76cfb00f",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "test1",
+        "payloadType": "str",
+        "x": 130,
+        "y": 340,
+        "wires": [
+            [
+                "eb8f71708d7b442f"
+            ]
+        ]
+    },
+    {
+        "id": "527f550912b8a377",
+        "type": "mqtt in",
+        "z": "bd07650f76cfb00f",
+        "name": "",
+        "topic": "/ESP32/TX/NOD002",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "04667a11efb39498",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 250,
+        "y": 160,
+        "wires": [
+            [
+                "817192abb64b3bfb"
+            ]
+        ]
+    },
+    {
+        "id": "f0c0c89f7f4ad07d",
+        "type": "inject",
+        "z": "bd07650f76cfb00f",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "opa",
+        "payload": "test2",
+        "payloadType": "str",
+        "x": 140,
+        "y": 520,
+        "wires": [
+            [
+                "ae5855c3199113a3"
+            ]
+        ]
+    },
+    {
+        "id": "ae5855c3199113a3",
+        "type": "mqtt out",
+        "z": "bd07650f76cfb00f",
+        "name": "",
+        "topic": "/ESP32/RX/NOD002",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "04667a11efb39498",
+        "x": 500,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "5d8ee911d476fa5d",
+        "type": "inject",
+        "z": "bd07650f76cfb00f",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "LED_ON",
+        "payloadType": "str",
+        "x": 140,
+        "y": 400,
+        "wires": [
+            [
+                "eb8f71708d7b442f",
+                "30e9d2dbbf4c057c"
+            ]
+        ]
+    },
+    {
+        "id": "dc790c362f142c3e",
+        "type": "inject",
+        "z": "bd07650f76cfb00f",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "LED_OFF",
+        "payloadType": "str",
+        "x": 140,
+        "y": 460,
+        "wires": [
+            [
+                "eb8f71708d7b442f"
+            ]
+        ]
+    },
+    {
+        "id": "def260646c738cf6",
+        "type": "inject",
+        "z": "bd07650f76cfb00f",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "http://192.168.1.5:8070/blink.bin",
+        "payloadType": "str",
+        "x": 110,
+        "y": 720,
+        "wires": [
+            [
+                "ad648ae6b03c5969"
+            ]
+        ]
+    },
+    {
+        "id": "ad648ae6b03c5969",
+        "type": "mqtt out",
+        "z": "bd07650f76cfb00f",
+        "name": "",
+        "topic": "/ESP32/RX/FRMW_DL",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "04667a11efb39498",
+        "x": 490,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "7cd947c39e80a689",
+        "type": "inject",
+        "z": "bd07650f76cfb00f",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "FRM_UPD",
+        "payloadType": "str",
+        "x": 120,
+        "y": 800,
+        "wires": [
+            [
+                "f7557f8773582d33"
+            ]
+        ]
+    },
+    {
+        "id": "f7557f8773582d33",
+        "type": "mqtt out",
+        "z": "bd07650f76cfb00f",
+        "name": "",
+        "topic": "/ESP32/RX/NOD001",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "04667a11efb39498",
+        "x": 480,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "30e9d2dbbf4c057c",
+        "type": "debug",
+        "z": "bd07650f76cfb00f",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 400,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "c9d6b8675f2c70fe",
+        "type": "mqtt in",
+        "z": "be62b38a1606f23a",
+        "g": "1f129b04f6a21947",
+        "name": "",
+        "topic": "/ESP32/TX/NOD001",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "04667a11efb39498",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 290,
+        "y": 280,
+        "wires": [
+            [
+                "6584e47bf7f1e642",
+                "06f82ba789799bf3"
+            ]
+        ]
+    },
+    {
+        "id": "44fa8f3bd01050dc",
+        "type": "ui_text",
+        "z": "be62b38a1606f23a",
+        "g": "1f129b04f6a21947",
+        "group": "bd99c6aad9b7fa01",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "version: ",
+        "format": "{{msg.payload.version}}",
+        "layout": "row-left",
+        "className": "medium",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 760,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "5d3c6c3f47ab9f0f",
+        "type": "ui_text",
+        "z": "be62b38a1606f23a",
+        "g": "1f129b04f6a21947",
+        "group": "bd99c6aad9b7fa01",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "name:",
+        "format": "{{msg.payload.fw_name}}",
+        "layout": "row-left",
+        "className": "medium",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 750,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "7a197ce2bc6b30ee",
+        "type": "ui_button",
+        "z": "be62b38a1606f23a",
+        "g": "1f129b04f6a21947",
+        "name": "",
+        "group": "bd99c6aad9b7fa01",
+        "order": 1,
+        "width": "6",
+        "height": "2",
+        "passthru": false,
+        "label": "get fw info",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "small",
+        "icon": "",
+        "payload": "get_fw_version",
+        "payloadType": "str",
+        "topic": "/ESP32/RX/NOD001",
+        "topicType": "str",
+        "x": 110,
+        "y": 160,
+        "wires": [
+            [
+                "e74909f69cdea0e1"
+            ]
+        ]
+    },
+    {
+        "id": "0ff5ca0a7bbe5edc",
+        "type": "ui_text_input",
+        "z": "be62b38a1606f23a",
+        "g": "1f129b04f6a21947",
+        "name": "firmware upd",
+        "label": "FW",
+        "tooltip": "insert firmware file name and press RETURN",
+        "group": "bd99c6aad9b7fa01",
+        "order": 7,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "mode": "text",
+        "delay": "0",
+        "topic": "/ESP32/RX/NOD001",
+        "sendOnBlur": true,
+        "className": "",
+        "topicType": "str",
+        "x": 110,
+        "y": 220,
+        "wires": [
+            [
+                "bc946ddfb8fd9e29"
+            ]
+        ]
+    },
+    {
+        "id": "e88a2abb2984a685",
+        "type": "ui_switch",
+        "z": "be62b38a1606f23a",
+        "g": "1f129b04f6a21947",
+        "name": "LED SW",
+        "label": "LED SW",
+        "tooltip": "",
+        "group": "bd99c6aad9b7fa01",
+        "order": 9,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "/ESP32/RX/NOD001",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "LED1,true",
+        "onvalueType": "str",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "LED1,false",
+        "offvalueType": "str",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "medium",
+        "x": 100,
+        "y": 100,
+        "wires": [
+            [
+                "e74909f69cdea0e1"
+            ]
+        ]
+    },
+    {
+        "id": "e74909f69cdea0e1",
+        "type": "mqtt out",
+        "z": "be62b38a1606f23a",
+        "g": "1f129b04f6a21947",
+        "name": "",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "04667a11efb39498",
+        "x": 510,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "d35387b34f9f21cc",
+        "type": "ui_text",
+        "z": "be62b38a1606f23a",
+        "g": "1f129b04f6a21947",
+        "group": "bd99c6aad9b7fa01",
+        "order": 10,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "button",
+        "format": "{{msg.payload.button}}",
+        "layout": "row-left",
+        "className": "medium",
+        "style": false,
+        "font": "",
+        "fontSize": "12",
+        "color": "#000000",
+        "x": 750,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "bc946ddfb8fd9e29",
+        "type": "function",
+        "z": "be62b38a1606f23a",
+        "g": "1f129b04f6a21947",
+        "name": "function 1",
+        "func": "let rx = msg.payload;\nmsg.payload = 'fw_update,' + rx;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 300,
+        "y": 220,
+        "wires": [
+            [
+                "e74909f69cdea0e1"
+            ]
+        ]
+    },
+    {
+        "id": "06f82ba789799bf3",
+        "type": "debug",
+        "z": "be62b38a1606f23a",
+        "g": "1f129b04f6a21947",
+        "name": "debug 6",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 720,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "6584e47bf7f1e642",
+        "type": "switch",
+        "z": "be62b38a1606f23a",
+        "g": "1f129b04f6a21947",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "hask",
+                "v": "button",
+                "vt": "str"
+            },
+            {
+                "t": "hask",
+                "v": "version",
+                "vt": "str"
+            },
+            {
+                "t": "hask",
+                "v": "fw_name",
+                "vt": "str"
+            },
+            {
+                "t": "hask",
+                "v": "date",
+                "vt": "str"
+            },
+            {
+                "t": "hask",
+                "v": "time",
+                "vt": "str"
+            },
+            {
+                "t": "hask",
+                "v": "board",
+                "vt": "str"
+            },
+            {
+                "t": "hask",
+                "v": "status",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 7,
+        "x": 470,
+        "y": 280,
+        "wires": [
+            [
+                "d35387b34f9f21cc"
+            ],
+            [
+                "44fa8f3bd01050dc"
+            ],
+            [
+                "5d3c6c3f47ab9f0f"
+            ],
+            [
+                "c7624a1bc912cfc9"
+            ],
+            [
+                "73284098740a52c0"
+            ],
+            [
+                "9dcd5867667d2e64"
+            ],
+            [
+                "9e8ff1662a84e827"
+            ]
+        ]
+    },
+    {
+        "id": "c7624a1bc912cfc9",
+        "type": "ui_text",
+        "z": "be62b38a1606f23a",
+        "g": "1f129b04f6a21947",
+        "group": "bd99c6aad9b7fa01",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "date:",
+        "format": "{{msg.payload.date}}",
+        "layout": "row-left",
+        "className": "medium",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 750,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "73284098740a52c0",
+        "type": "ui_text",
+        "z": "be62b38a1606f23a",
+        "g": "1f129b04f6a21947",
+        "group": "bd99c6aad9b7fa01",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "time:",
+        "format": "{{msg.payload.time}}",
+        "layout": "row-left",
+        "className": "medium",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 750,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "9dcd5867667d2e64",
+        "type": "ui_text",
+        "z": "be62b38a1606f23a",
+        "g": "1f129b04f6a21947",
+        "group": "bd99c6aad9b7fa01",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "board:",
+        "format": "{{msg.payload.board}}",
+        "layout": "row-left",
+        "className": "medium",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 750,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "73b2223329d4016b",
+        "type": "mqtt in",
+        "z": "be62b38a1606f23a",
+        "g": "f2a0ac1a3b240371",
+        "name": "",
+        "topic": "/ESP32/TX/NOD002",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "04667a11efb39498",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 290,
+        "y": 800,
+        "wires": [
+            [
+                "b06c491dc1cf6a1d"
+            ]
+        ]
+    },
+    {
+        "id": "d1450e715af3b928",
+        "type": "ui_text",
+        "z": "be62b38a1606f23a",
+        "g": "f2a0ac1a3b240371",
+        "group": "62122f01a2388250",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "version: ",
+        "format": "{{msg.payload.version}}",
+        "layout": "row-left",
+        "className": "medium",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 760,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "1ba43b3caa01d864",
+        "type": "ui_text",
+        "z": "be62b38a1606f23a",
+        "g": "f2a0ac1a3b240371",
+        "group": "62122f01a2388250",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "name:",
+        "format": "{{msg.payload.fw_name}}",
+        "layout": "row-left",
+        "className": "medium",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 750,
+        "y": 860,
+        "wires": []
+    },
+    {
+        "id": "e6bc2384f23632b3",
+        "type": "ui_button",
+        "z": "be62b38a1606f23a",
+        "g": "f2a0ac1a3b240371",
+        "name": "",
+        "group": "62122f01a2388250",
+        "order": 1,
+        "width": "6",
+        "height": "2",
+        "passthru": false,
+        "label": "get fw info",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "small",
+        "icon": "",
+        "payload": "get_fw_version",
+        "payloadType": "str",
+        "topic": "/ESP32/RX/NOD002",
+        "topicType": "str",
+        "x": 110,
+        "y": 680,
+        "wires": [
+            [
+                "5d7bd062eb091aae"
+            ]
+        ]
+    },
+    {
+        "id": "2f3e2d3520365ae3",
+        "type": "ui_text_input",
+        "z": "be62b38a1606f23a",
+        "g": "f2a0ac1a3b240371",
+        "name": "firmware upd",
+        "label": "FW",
+        "tooltip": "insert firmware file name and press RETURN",
+        "group": "62122f01a2388250",
+        "order": 7,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "mode": "text",
+        "delay": "0",
+        "topic": "/ESP32/RX/NOD002",
+        "sendOnBlur": true,
+        "className": "small",
+        "topicType": "str",
+        "x": 110,
+        "y": 740,
+        "wires": [
+            [
+                "a441fccff3e1f4f2"
+            ]
+        ]
+    },
+    {
+        "id": "371c45a35d21c756",
+        "type": "ui_switch",
+        "z": "be62b38a1606f23a",
+        "g": "f2a0ac1a3b240371",
+        "name": "LED SW",
+        "label": "LED SW",
+        "tooltip": "",
+        "group": "62122f01a2388250",
+        "order": 8,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "/ESP32/RX/NOD002",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "LED1,true",
+        "onvalueType": "str",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "LED1,false",
+        "offvalueType": "str",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "medium",
+        "x": 100,
+        "y": 620,
+        "wires": [
+            [
+                "5d7bd062eb091aae"
+            ]
+        ]
+    },
+    {
+        "id": "5d7bd062eb091aae",
+        "type": "mqtt out",
+        "z": "be62b38a1606f23a",
+        "g": "f2a0ac1a3b240371",
+        "name": "",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "04667a11efb39498",
+        "x": 510,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "a1b51c6d2c884a5c",
+        "type": "ui_text",
+        "z": "be62b38a1606f23a",
+        "g": "f2a0ac1a3b240371",
+        "group": "62122f01a2388250",
+        "order": 9,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "button",
+        "format": "{{msg.payload.button}}",
+        "layout": "row-left",
+        "className": "medium",
+        "style": false,
+        "font": "",
+        "fontSize": "12",
+        "color": "#000000",
+        "x": 750,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "a441fccff3e1f4f2",
+        "type": "function",
+        "z": "be62b38a1606f23a",
+        "g": "f2a0ac1a3b240371",
+        "name": "function 2",
+        "func": "let rx = msg.payload;\nmsg.payload = 'fw_update,' + rx;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 300,
+        "y": 740,
+        "wires": [
+            [
+                "5d7bd062eb091aae"
+            ]
+        ]
+    },
+    {
+        "id": "83edbce8cc15d51c",
+        "type": "debug",
+        "z": "be62b38a1606f23a",
+        "g": "f2a0ac1a3b240371",
+        "name": "debug 7",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 720,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "b06c491dc1cf6a1d",
+        "type": "switch",
+        "z": "be62b38a1606f23a",
+        "g": "f2a0ac1a3b240371",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "hask",
+                "v": "button",
+                "vt": "str"
+            },
+            {
+                "t": "hask",
+                "v": "version",
+                "vt": "str"
+            },
+            {
+                "t": "hask",
+                "v": "fw_name",
+                "vt": "str"
+            },
+            {
+                "t": "hask",
+                "v": "date",
+                "vt": "str"
+            },
+            {
+                "t": "hask",
+                "v": "time",
+                "vt": "str"
+            },
+            {
+                "t": "hask",
+                "v": "board",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 6,
+        "x": 470,
+        "y": 800,
+        "wires": [
+            [
+                "a1b51c6d2c884a5c",
+                "83edbce8cc15d51c"
+            ],
+            [
+                "d1450e715af3b928"
+            ],
+            [
+                "1ba43b3caa01d864"
+            ],
+            [
+                "169f61cd75d29b7c"
+            ],
+            [
+                "19dcb708cae0a28e"
+            ],
+            [
+                "695ee2363d650122"
+            ]
+        ]
+    },
+    {
+        "id": "169f61cd75d29b7c",
+        "type": "ui_text",
+        "z": "be62b38a1606f23a",
+        "g": "f2a0ac1a3b240371",
+        "group": "62122f01a2388250",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "date:",
+        "format": "{{msg.payload.date}}",
+        "layout": "row-left",
+        "className": "medium",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 750,
+        "y": 920,
+        "wires": []
+    },
+    {
+        "id": "19dcb708cae0a28e",
+        "type": "ui_text",
+        "z": "be62b38a1606f23a",
+        "g": "f2a0ac1a3b240371",
+        "group": "62122f01a2388250",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "time:",
+        "format": "{{msg.payload.time}}",
+        "layout": "row-left",
+        "className": "medium",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 750,
+        "y": 980,
+        "wires": []
+    },
+    {
+        "id": "695ee2363d650122",
+        "type": "ui_text",
+        "z": "be62b38a1606f23a",
+        "g": "f2a0ac1a3b240371",
+        "group": "62122f01a2388250",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "board:",
+        "format": "{{msg.payload.board}}",
+        "layout": "row-left",
+        "className": "medium",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 750,
+        "y": 1040,
+        "wires": []
+    },
+    {
+        "id": "9e8ff1662a84e827",
+        "type": "ui_text",
+        "z": "be62b38a1606f23a",
+        "g": "1f129b04f6a21947",
+        "group": "bd99c6aad9b7fa01",
+        "order": 8,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "status:",
+        "format": "{{msg.payload.status}}",
+        "layout": "row-left",
+        "className": "medium",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 750,
+        "y": 460,
+        "wires": []
+    }
+]
