@@ -6,5 +6,8 @@ OTA Peers update.
 MQTT NODERED.
 ![topology](/images/topologia.jpg)
 
+for the gateway tested ESP32-C3-MINI-1 chinese devboard
+for nodes tested with ESP32-S2FN4R2 chinese devboard (Lolin)
+
 Code should be cleaned ...hope to find the time to do.
 
