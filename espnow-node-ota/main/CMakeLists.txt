@@ -1,4 +1,4 @@
-idf_component_register(SRCS "ESPNOW_node.c"
+idf_component_register(SRCS "ESPNOW_node.c" "ESPNOW_ota.c"
                     INCLUDE_DIRS "." "../../common")
                     
 # Create a NVS image from the contents of the `nvs_data` CSV file

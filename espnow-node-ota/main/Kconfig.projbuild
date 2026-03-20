@@ -18,10 +18,6 @@ menu "Application Configuration"
 		string "ID of the node"
 		default "NOD001"
 		
-    config MESSAGE_PAYLOAD
-		string "Message payload sent to MQTT server"
-		default "hello NOD001"
-
 	config LED_GPIO
         int "LED GPIO number"
         range ENV_GPIO_RANGE_MIN ENV_GPIO_OUT_RANGE_MAX

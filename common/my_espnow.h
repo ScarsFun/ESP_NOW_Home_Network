@@ -10,6 +10,8 @@
 #ifndef ESPNOW_H
 #define ESPNOW_H
 
+#define RTC_MAGIC 0xA5A5A5A5
+
 #define ESPNOW_PAYLOAD_LEN                  (230)
 #define MQTT_PAYLOAD_LEN                    (180)
 #define ESP_MQTT_CLIENT_PUBBLISH            "/ESP32/TX/"
@@ -107,4 +109,12 @@ typedef struct
     char node_id [16];
     uint8_t mac_addr[ESP_NOW_ETH_ALEN];
 }espnow_peers_table_t;
+
+typedef struct {
+    uint8_t gw_addr[6];
+    uint8_t gw_channel;
+    uint32_t gw_status; // RTC_MAGIC if already discovered
+    //uint32_t counter;
+    //uint8_t ack_errors;
+} gw_rtc_t;
 #endif

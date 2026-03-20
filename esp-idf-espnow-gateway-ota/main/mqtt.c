@@ -174,8 +174,8 @@ void mqtt_init() {
   // Resolve mDNS host name
   char ip[128];
   ESP_LOGI(pcTaskGetName(0), "CONFIG_MQTT_BROKER=[%s]", CONFIG_MQTT_BROKER);
-  //convert_mdns_host(CONFIG_MQTT_BROKER, ip);
-  convert_mdns_host("192.168.1.9", ip);
+  convert_mdns_host(CONFIG_MQTT_BROKER, ip);
+  //convert_mdns_host("192.168.1.9", ip);
   ESP_LOGI(pcTaskGetName(0), "ip=[%s]", ip);
   char uri[138];
   sprintf(uri, "mqtt://%s", ip);
