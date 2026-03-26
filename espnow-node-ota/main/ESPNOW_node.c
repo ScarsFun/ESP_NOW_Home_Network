@@ -544,7 +544,7 @@ void scan_gw_channel(void *pvParameters)
             ESP_LOGI(pcTaskGetName(0), "received on CH %d ...", i);
             peer->channel = i;
             memcpy(peer->peer_addr, gw_MAC, sizeof(gw_MAC));
-            ESP_ERROR_CHECK(esp_now_add_peer(peer));
+            //ESP_ERROR_CHECK(esp_now_add_peer(peer));
             ESP_ERROR_CHECK(esp_now_del_peer(broadcast_mac));
             memcpy(send_param->dest_mac, peer->peer_addr, ESP_NOW_ETH_ALEN);
             break;
@@ -559,6 +559,7 @@ void scan_gw_channel(void *pvParameters)
         esp_restart();
         vTaskDelete(NULL);
     };
+    ESP_ERROR_CHECK(esp_now_add_peer(peer));
     esp_now_get_peer(peer->peer_addr, peer);
     ESP_LOGI(pcTaskGetName(0), "channel:%d", peer->channel);
     ESP_LOGI(pcTaskGetName(0), "gateway address " MACSTR "",
@@ -611,7 +612,7 @@ void espnow_init(void)
     xEventGroupClearBits(scan_ch_group, BROADCAST_CONNECTED_BIT);
 
     ack_flag = xEventGroupCreate();
-    xEventGroupClearBits(scan_ch_group, ACK_RECEIVED_BIT);
+    xEventGroupClearBits(ack_flag, ACK_RECEIVED_BIT);
 
     ota_status_group = xEventGroupCreate();
     xEventGroupClearBits(ota_status_group, OTA_GET_FW_BIT | OTA_ABORT_FW_BIT | OTA_END_FW_BIT);
@@ -649,8 +650,8 @@ void sw_button_task(void *pvParameters)
     ESP_LOGI(pcTaskGetName(0), "SW button task started...");
     for (;;)
     {
-        if (gpio_get_level(GPIO_INPUT_SWBUTTON) == 0)
-        {
+       if (gpio_get_level(GPIO_INPUT_SWBUTTON) == 0)
+       {
             btcounter ++;
             xSemaphoreTake(xSemaphoreEspnow, portMAX_DELAY);
             sprintf(msg, "{\"button\":%d}", btcounter);
