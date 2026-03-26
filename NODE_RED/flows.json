@@ -1,18 +1,10 @@
 [
     {
-        "id": "bd07650f76cfb00f",
-        "type": "tab",
-        "label": "Flow 1",
-        "disabled": true,
-        "info": "",
-        "env": []
-    },
-    {
         "id": "be62b38a1606f23a",
         "type": "tab",
-        "label": "Flow 2",
+        "label": "ESPNOW-MQTT",
         "disabled": false,
-        "info": "",
+        "info": "Simple test Flow",
         "env": []
     },
     {
@@ -43,7 +35,8 @@
             "c7624a1bc912cfc9",
             "73284098740a52c0",
             "9dcd5867667d2e64",
-            "9e8ff1662a84e827"
+            "9e8ff1662a84e827",
+            "a142df78e5ca8c79"
         ],
         "x": 14,
         "y": 59,
@@ -77,12 +70,14 @@
             "b06c491dc1cf6a1d",
             "169f61cd75d29b7c",
             "19dcb708cae0a28e",
-            "695ee2363d650122"
+            "695ee2363d650122",
+            "1a5cce0d25d29a67",
+            "92c68bcba95b3a30"
         ],
         "x": 14,
         "y": 579,
         "w": 832,
-        "h": 502
+        "h": 442
     },
     {
         "id": "04667a11efb39498",
@@ -241,327 +236,6 @@
         "className": ""
     },
     {
-        "id": "7e830f4821dc86a5",
-        "type": "mqtt in",
-        "z": "bd07650f76cfb00f",
-        "name": "",
-        "topic": "/ESP32/TX/NOD001",
-        "qos": "2",
-        "datatype": "auto-detect",
-        "broker": "04667a11efb39498",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "inputs": 0,
-        "x": 250,
-        "y": 220,
-        "wires": [
-            [
-                "817192abb64b3bfb"
-            ]
-        ]
-    },
-    {
-        "id": "817192abb64b3bfb",
-        "type": "debug",
-        "z": "bd07650f76cfb00f",
-        "name": "debug 1",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 460,
-        "y": 220,
-        "wires": []
-    },
-    {
-        "id": "eb8f71708d7b442f",
-        "type": "mqtt out",
-        "z": "bd07650f76cfb00f",
-        "name": "",
-        "topic": "/ESP32/RX/NOD001",
-        "qos": "",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "04667a11efb39498",
-        "x": 500,
-        "y": 340,
-        "wires": []
-    },
-    {
-        "id": "e378de1eb1a2389a",
-        "type": "inject",
-        "z": "bd07650f76cfb00f",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "test1",
-        "payloadType": "str",
-        "x": 130,
-        "y": 340,
-        "wires": [
-            [
-                "eb8f71708d7b442f"
-            ]
-        ]
-    },
-    {
-        "id": "527f550912b8a377",
-        "type": "mqtt in",
-        "z": "bd07650f76cfb00f",
-        "name": "",
-        "topic": "/ESP32/TX/NOD002",
-        "qos": "2",
-        "datatype": "auto-detect",
-        "broker": "04667a11efb39498",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "inputs": 0,
-        "x": 250,
-        "y": 160,
-        "wires": [
-            [
-                "817192abb64b3bfb"
-            ]
-        ]
-    },
-    {
-        "id": "f0c0c89f7f4ad07d",
-        "type": "inject",
-        "z": "bd07650f76cfb00f",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "opa",
-        "payload": "test2",
-        "payloadType": "str",
-        "x": 140,
-        "y": 520,
-        "wires": [
-            [
-                "ae5855c3199113a3"
-            ]
-        ]
-    },
-    {
-        "id": "ae5855c3199113a3",
-        "type": "mqtt out",
-        "z": "bd07650f76cfb00f",
-        "name": "",
-        "topic": "/ESP32/RX/NOD002",
-        "qos": "",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "04667a11efb39498",
-        "x": 500,
-        "y": 520,
-        "wires": []
-    },
-    {
-        "id": "5d8ee911d476fa5d",
-        "type": "inject",
-        "z": "bd07650f76cfb00f",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "LED_ON",
-        "payloadType": "str",
-        "x": 140,
-        "y": 400,
-        "wires": [
-            [
-                "eb8f71708d7b442f",
-                "30e9d2dbbf4c057c"
-            ]
-        ]
-    },
-    {
-        "id": "dc790c362f142c3e",
-        "type": "inject",
-        "z": "bd07650f76cfb00f",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "LED_OFF",
-        "payloadType": "str",
-        "x": 140,
-        "y": 460,
-        "wires": [
-            [
-                "eb8f71708d7b442f"
-            ]
-        ]
-    },
-    {
-        "id": "def260646c738cf6",
-        "type": "inject",
-        "z": "bd07650f76cfb00f",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "http://192.168.1.5:8070/blink.bin",
-        "payloadType": "str",
-        "x": 110,
-        "y": 720,
-        "wires": [
-            [
-                "ad648ae6b03c5969"
-            ]
-        ]
-    },
-    {
-        "id": "ad648ae6b03c5969",
-        "type": "mqtt out",
-        "z": "bd07650f76cfb00f",
-        "name": "",
-        "topic": "/ESP32/RX/FRMW_DL",
-        "qos": "",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "04667a11efb39498",
-        "x": 490,
-        "y": 720,
-        "wires": []
-    },
-    {
-        "id": "7cd947c39e80a689",
-        "type": "inject",
-        "z": "bd07650f76cfb00f",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "FRM_UPD",
-        "payloadType": "str",
-        "x": 120,
-        "y": 800,
-        "wires": [
-            [
-                "f7557f8773582d33"
-            ]
-        ]
-    },
-    {
-        "id": "f7557f8773582d33",
-        "type": "mqtt out",
-        "z": "bd07650f76cfb00f",
-        "name": "",
-        "topic": "/ESP32/RX/NOD001",
-        "qos": "",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "04667a11efb39498",
-        "x": 480,
-        "y": 800,
-        "wires": []
-    },
-    {
-        "id": "30e9d2dbbf4c057c",
-        "type": "debug",
-        "z": "bd07650f76cfb00f",
-        "name": "debug 3",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 400,
-        "y": 420,
-        "wires": []
-    },
-    {
         "id": "c9d6b8675f2c70fe",
         "type": "mqtt in",
         "z": "be62b38a1606f23a",
@@ -575,8 +249,8 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 290,
-        "y": 280,
+        "x": 210,
+        "y": 400,
         "wires": [
             [
                 "6584e47bf7f1e642",
@@ -664,7 +338,7 @@
         "g": "1f129b04f6a21947",
         "name": "firmware upd",
         "label": "FW",
-        "tooltip": "insert firmware file name and press RETURN",
+        "tooltip": "insert firmware url and press RETURN",
         "group": "bd99c6aad9b7fa01",
         "order": 7,
         "width": 0,
@@ -846,8 +520,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 7,
-        "x": 470,
-        "y": 280,
+        "x": 550,
+        "y": 360,
         "wires": [
             [
                 "d35387b34f9f21cc"
@@ -952,8 +626,8 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 290,
-        "y": 800,
+        "x": 210,
+        "y": 980,
         "wires": [
             [
                 "b06c491dc1cf6a1d"
@@ -966,7 +640,7 @@
         "z": "be62b38a1606f23a",
         "g": "f2a0ac1a3b240371",
         "group": "62122f01a2388250",
-        "order": 6,
+        "order": 7,
         "width": 0,
         "height": 0,
         "name": "",
@@ -979,7 +653,7 @@
         "fontSize": 16,
         "color": "#000000",
         "x": 760,
-        "y": 800,
+        "y": 780,
         "wires": []
     },
     {
@@ -988,7 +662,7 @@
         "z": "be62b38a1606f23a",
         "g": "f2a0ac1a3b240371",
         "group": "62122f01a2388250",
-        "order": 3,
+        "order": 4,
         "width": 0,
         "height": 0,
         "name": "",
@@ -1001,7 +675,7 @@
         "fontSize": 16,
         "color": "#000000",
         "x": 750,
-        "y": 860,
+        "y": 820,
         "wires": []
     },
     {
@@ -1042,7 +716,7 @@
         "label": "FW",
         "tooltip": "insert firmware file name and press RETURN",
         "group": "62122f01a2388250",
-        "order": 7,
+        "order": 8,
         "width": 0,
         "height": 0,
         "passthru": true,
@@ -1069,7 +743,7 @@
         "label": "LED SW",
         "tooltip": "",
         "group": "62122f01a2388250",
-        "order": 8,
+        "order": 10,
         "width": 0,
         "height": 0,
         "passthru": true,
@@ -1120,7 +794,7 @@
         "z": "be62b38a1606f23a",
         "g": "f2a0ac1a3b240371",
         "group": "62122f01a2388250",
-        "order": 9,
+        "order": 11,
         "width": 0,
         "height": 0,
         "name": "",
@@ -1212,11 +886,16 @@
                 "t": "hask",
                 "v": "board",
                 "vt": "str"
+            },
+            {
+                "t": "hask",
+                "v": "status",
+                "vt": "str"
             }
         ],
         "checkall": "true",
         "repair": false,
-        "outputs": 6,
+        "outputs": 7,
         "x": 470,
         "y": 800,
         "wires": [
@@ -1238,6 +917,9 @@
             ],
             [
                 "695ee2363d650122"
+            ],
+            [
+                "92c68bcba95b3a30"
             ]
         ]
     },
@@ -1247,7 +929,7 @@
         "z": "be62b38a1606f23a",
         "g": "f2a0ac1a3b240371",
         "group": "62122f01a2388250",
-        "order": 4,
+        "order": 5,
         "width": 0,
         "height": 0,
         "name": "",
@@ -1260,7 +942,7 @@
         "fontSize": 16,
         "color": "#000000",
         "x": 750,
-        "y": 920,
+        "y": 860,
         "wires": []
     },
     {
@@ -1269,7 +951,7 @@
         "z": "be62b38a1606f23a",
         "g": "f2a0ac1a3b240371",
         "group": "62122f01a2388250",
-        "order": 5,
+        "order": 6,
         "width": 0,
         "height": 0,
         "name": "",
@@ -1282,7 +964,7 @@
         "fontSize": 16,
         "color": "#000000",
         "x": 750,
-        "y": 980,
+        "y": 900,
         "wires": []
     },
     {
@@ -1291,7 +973,7 @@
         "z": "be62b38a1606f23a",
         "g": "f2a0ac1a3b240371",
         "group": "62122f01a2388250",
-        "order": 2,
+        "order": 3,
         "width": 0,
         "height": 0,
         "name": "",
@@ -1304,7 +986,7 @@
         "fontSize": 16,
         "color": "#000000",
         "x": 750,
-        "y": 1040,
+        "y": 940,
         "wires": []
     },
     {
@@ -1327,6 +1009,86 @@
         "color": "#000000",
         "x": 750,
         "y": 460,
+        "wires": []
+    },
+    {
+        "id": "a142df78e5ca8c79",
+        "type": "ui_button",
+        "z": "be62b38a1606f23a",
+        "g": "1f129b04f6a21947",
+        "name": "",
+        "group": "bd99c6aad9b7fa01",
+        "order": 1,
+        "width": "6",
+        "height": "2",
+        "passthru": false,
+        "label": "check node",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "small",
+        "icon": "",
+        "payload": "check",
+        "payloadType": "str",
+        "topic": "/ESP32/RX/NOD001",
+        "topicType": "str",
+        "x": 110,
+        "y": 300,
+        "wires": [
+            [
+                "e74909f69cdea0e1"
+            ]
+        ]
+    },
+    {
+        "id": "1a5cce0d25d29a67",
+        "type": "ui_button",
+        "z": "be62b38a1606f23a",
+        "g": "f2a0ac1a3b240371",
+        "name": "",
+        "group": "62122f01a2388250",
+        "order": 2,
+        "width": "6",
+        "height": "2",
+        "passthru": false,
+        "label": "check node",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "small",
+        "icon": "",
+        "payload": "check",
+        "payloadType": "str",
+        "topic": "/ESP32/RX/NOD002",
+        "topicType": "str",
+        "x": 110,
+        "y": 820,
+        "wires": [
+            [
+                "5d7bd062eb091aae"
+            ]
+        ]
+    },
+    {
+        "id": "92c68bcba95b3a30",
+        "type": "ui_text",
+        "z": "be62b38a1606f23a",
+        "g": "f2a0ac1a3b240371",
+        "group": "62122f01a2388250",
+        "order": 9,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "status:",
+        "format": "{{msg.payload.status}}",
+        "layout": "row-left",
+        "className": "medium",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 750,
+        "y": 980,
         "wires": []
     }
 ]
