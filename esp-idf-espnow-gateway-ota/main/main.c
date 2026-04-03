@@ -4,14 +4,15 @@
  *
  * @brief      This file implements ESPNOW MQTT Gateway
  * This code is in the Public Domain (or CC0 licensed, at your option.)
-
-   Unless required by applicable law or agreed to in writing, this
-   software is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
-   CONDITIONS OF ANY KIND, either express or implied.
  *
- * @author     FART ELECTRONICA
+ * Unless required by applicable law or agreed to in writing, this
+ * software is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied.
+ *
+ * @author     https://github.com/ScarsFun/ESP_NOW_Home_Network
  * @date       2023
  */
+
 
 
 #include <assert.h>
@@ -52,6 +53,10 @@
 
 #include "led_mon.h"
 
+#if ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(5, 4, 0)
+#error "This project requires ESP-IDF v5.4 or higher!"
+#endif
+
 
 esp_http_client_handle_t HTTPclient;
 QueueHandle_t xQueuePublish, xQueueSubscribe;
@@ -61,6 +66,8 @@ SemaphoreHandle_t xSemaphoreData;
 espnow_send_param_t *send_param;
 espnow_peers_table_t peers_table[20];
 led_param_t led_param;
+
+ota_server_data_t http_ota_server;
 
 /* The event group allows multiple bits for each event, but we only care about
  * two events:
@@ -77,14 +84,7 @@ static int s_retry_num = 0;
 
 static void ota_firmware_task(void *);
 
-typedef struct Data_t
-{
-    uint8_t ota_destination_mac[ESP_NOW_ETH_ALEN];
-    char url[100];
-    char node_id[8];
-} OtaData_t;
 
-OtaData_t sample_ota;
 
 /**
  * @brief      event handler for AP connection
@@ -399,7 +399,7 @@ static void errHTTPclient_deinit(void)
     esp_http_client_close(HTTPclient);
     esp_http_client_cleanup(HTTPclient);
     xEventGroupClearBits(ota_status_group, OTA_RUNNING_BIT);
-    send_mqtt_ota_status("OTA Aborted!", sample_ota.node_id);
+    send_mqtt_ota_status("OTA Aborted!", http_ota_server.node_id);
 }
 /**
  * @brief      { function_description }
@@ -539,10 +539,10 @@ static void espnow_task(void *pvParameter)
                 ESP_LOGI(pcTaskGetName(0), "firmware request from:" MACSTR,
                          MAC2STR(send_param->dest_mac));
                 ESP_LOGI(pcTaskGetName(0), "file: %s", recv_data.firmware_url );
-                memcpy (sample_ota.ota_destination_mac, send_param->dest_mac, ESP_NOW_ETH_ALEN);
-                strcpy (sample_ota.url, recv_data.firmware_url);
-                strcpy (sample_ota.node_id, recv_data.node_id);
-                xTaskCreate(ota_firmware_task, "ota_firmware_task", 1024 * 5, (void *) &sample_ota, 2, NULL);
+                memcpy (http_ota_server.ota_destination_mac, send_param->dest_mac, ESP_NOW_ETH_ALEN);
+                strcpy (http_ota_server.url, recv_data.firmware_url);
+                strcpy (http_ota_server.node_id, recv_data.node_id);
+                xTaskCreate(ota_firmware_task, "ota_firmware_task", 1024 * 5, (void *) &http_ota_server, 2, NULL);
             }
             break;
             case ESPNOW_TYPE_OTA_INFO:
@@ -562,7 +562,7 @@ static void espnow_task(void *pvParameter)
                 case ESPNOW_STATUS_OTA_ACK_ERROR:
                 {
                     ESP_LOGE(pcTaskGetName(0), "received ota chunk invalid from node");
-                    send_mqtt_ota_status("OTA ack error. Abort", sample_ota.node_id);
+                    send_mqtt_ota_status("OTA ack error. Abort", http_ota_server.node_id);
                     xEventGroupSetBits(ota_status_group, OTA_ABORT_BIT);
                     errHTTPclient_deinit();
                 }
@@ -570,7 +570,7 @@ static void espnow_task(void *pvParameter)
                 case ESPNOW_STATUS_OTA_ABORT_FIRMWARE_DOWNLOAD:
                 {
                     ESP_LOGE(pcTaskGetName(0), "firmware download aborted by node");
-                    send_mqtt_ota_status("OTA aborted by node", sample_ota.node_id);
+                    send_mqtt_ota_status("OTA aborted by node", http_ota_server.node_id);
                     xEventGroupSetBits(ota_status_group, OTA_ABORT_BIT);
                     errHTTPclient_deinit();
                 }
@@ -697,41 +697,40 @@ static void send_ota_info(const uint8_t *destination_mac, uint8_t ota_info_msg)
 static void ota_firmware_task(void *Data)
 //static size_t app_firmware_download(const char *url, const uint8_t *node_mac_addr)
 {
-#define OTA_DATA_PAYLOAD_LEN 230
     esp_err_t ret       = ESP_OK;
-    uint8_t *data       = malloc(OTA_DATA_PAYLOAD_LEN);
+    uint8_t *data       = malloc(MAX_OTA_PAYLOAD_LEN);
     size_t total_size   = 0;
     uint32_t start_time = xTaskGetTickCount();
     char ota_status[25];
 
-    OtaData_t sample_ota;
+    
     //MQTT_t mqttBuf;
     xEventGroupSetBits(ota_status_group, OTA_CHUNK_OK_BIT);
     xEventGroupClearBits(ota_status_group, OTA_ABORT_BIT);
 
-    strcpy(sample_ota.node_id, (const char *)(( OtaData_t *)Data)->node_id);
-    strcpy(sample_ota.url, (const char *)(( OtaData_t *)Data)->url);
-    memcpy(sample_ota.ota_destination_mac, (const uint8_t *)(( OtaData_t *)Data)->ota_destination_mac, ESP_NOW_ETH_ALEN);
+    strcpy(http_ota_server.node_id, (const char *)(( ota_server_data_t *)Data)->node_id);
+    strcpy(http_ota_server.url, (const char *)(( ota_server_data_t *)Data)->url);
+    memcpy(http_ota_server.ota_destination_mac, (const uint8_t *)(( ota_server_data_t *)Data)->ota_destination_mac, ESP_NOW_ETH_ALEN);
 
     esp_http_client_config_t config =
     {
-        .url            = sample_ota.url,
+        .url            = http_ota_server.url,
         .transport_type = HTTP_TRANSPORT_UNKNOWN,
     };
 
-    ESP_LOGD(pcTaskGetName(0), "peer address " MACSTR "", MAC2STR((uint8_t *) sample_ota.ota_destination_mac));
+    ESP_LOGD(pcTaskGetName(0), "peer address " MACSTR "", MAC2STR((uint8_t *) http_ota_server.ota_destination_mac));
 
     // @brief 1. Connect to the server
     HTTPclient = esp_http_client_init(&config);
     if (!HTTPclient)
     {
-        ESP_LOGE(pcTaskGetName(0), "Init HTTP connection: %s", (char *)sample_ota.url);
+        ESP_LOGE(pcTaskGetName(0), "Init HTTP connection: %s", (char *)http_ota_server.url);
         free(data);
         errHTTPclient_deinit();
-        send_mqtt_ota_status("HTTP server error!", sample_ota.node_id);
+        send_mqtt_ota_status("HTTP server error!", http_ota_server.node_id);
         vTaskDelete(NULL);
     }
-    ESP_LOGI(pcTaskGetName(0), "Open HTTP connection: %s", (char *)sample_ota.url);
+    ESP_LOGI(pcTaskGetName(0), "Open HTTP connection: %s", (char *)http_ota_server.url);
 
     // @brief First, the firmware is obtained from the http server
     ret = esp_http_client_open(HTTPclient, 0);
@@ -739,7 +738,7 @@ static void ota_firmware_task(void *Data)
     {
         ESP_LOGW(pcTaskGetName(0), "<%s> Connection service failed", esp_err_to_name(ret));
         errHTTPclient_deinit();
-        send_mqtt_ota_status("HTTP server error!", sample_ota.node_id);
+        send_mqtt_ota_status("HTTP server error!", http_ota_server.node_id);
         vTaskDelete(NULL);
     }
 
@@ -747,7 +746,7 @@ static void ota_firmware_task(void *Data)
     if (total_size <= 0)
     {
         ESP_LOGW(pcTaskGetName(0), "Please check the address of the server");
-        ret = esp_http_client_read(HTTPclient, (char *)data, OTA_DATA_PAYLOAD_LEN);
+        ret = esp_http_client_read(HTTPclient, (char *)data, MAX_OTA_PAYLOAD_LEN);
         if (ret < 0)
         {
             ESP_LOGE(pcTaskGetName(0), "<%s> Read data from http stream", esp_err_to_name(ret));
@@ -756,13 +755,13 @@ static void ota_firmware_task(void *Data)
         ESP_LOGW(pcTaskGetName(0), "Recv data: %.*s", ret, data);
         free(data);
         errHTTPclient_deinit();
-        send_mqtt_ota_status("HTTP server error!", sample_ota.node_id);
+        send_mqtt_ota_status("HTTP server error!", http_ota_server.node_id);
         vTaskDelete(NULL);
     }
     // advice node to start download OTA Firmware
-    send_mqtt_ota_status("OTA dw start...", sample_ota.node_id);
+    send_mqtt_ota_status("OTA dw start...", http_ota_server.node_id);
     xEventGroupSetBits(ota_status_group, OTA_RUNNING_BIT);
-    send_ota_info(sample_ota.ota_destination_mac, ESPNOW_STATUS_OTA_START_FIRMWARE_DOWNLOAD);
+    send_ota_info(http_ota_server.ota_destination_mac, ESPNOW_STATUS_OTA_START_FIRMWARE_DOWNLOAD);
     vTaskDelay(1200 / portTICK_PERIOD_MS);
 
     // @brief 2. Read firmware from the server and send chunks to node in ESPNOW frames.
@@ -772,12 +771,12 @@ static void ota_firmware_task(void *Data)
 
     for (ssize_t size = 0, recv_size = 0; recv_size < total_size; recv_size += size)
     {
-        size = esp_http_client_read(HTTPclient, (char *)data, OTA_DATA_PAYLOAD_LEN);
+        size = esp_http_client_read(HTTPclient, (char *)data, MAX_OTA_PAYLOAD_LEN);
         if (size < 0)
         {
             ESP_LOGE(pcTaskGetName(0), "<%s> Read data from http stream", esp_err_to_name(ret));
             free(data);
-            send_ota_info(sample_ota.ota_destination_mac, ESPNOW_STATUS_OTA_ABORT_FIRMWARE_DOWNLOAD);
+            send_ota_info(http_ota_server.ota_destination_mac, ESPNOW_STATUS_OTA_ABORT_FIRMWARE_DOWNLOAD);
             errHTTPclient_deinit();
             vTaskDelete(NULL);
         }
@@ -789,7 +788,7 @@ static void ota_firmware_task(void *Data)
             buf.ota_chunk_crc = esp_crc8_le(0, (uint8_t const *) buf.ota_chunk, size);
             EventBits_t uxBits = xEventGroupWaitBits(ota_status_group,
                                  OTA_CHUNK_OK_BIT | OTA_ABORT_BIT,
-                                 pdTRUE, pdFALSE, 4500 / portTICK_PERIOD_MS);
+                                 pdTRUE, pdFALSE, 1500 / portTICK_PERIOD_MS);
             if (( uxBits & OTA_ABORT_BIT ) != 0)
             {
                 free(data);
@@ -802,14 +801,14 @@ static void ota_firmware_task(void *Data)
                 //ESP_LOGI(pcTaskGetName(0), "Ota data: %.*s", size, (char*)buf.ota_chunk);
                 send_param->buffer = (uint8_t *)&buf;
                 send_param->len = sizeof(espnow_ota_data_t);
-                memcpy(send_param->dest_mac, (uint8_t *) sample_ota.ota_destination_mac, ESP_NOW_ETH_ALEN);
+                memcpy(send_param->dest_mac, (uint8_t *) http_ota_server.ota_destination_mac, ESP_NOW_ETH_ALEN);
                 ret = esp_now_send(send_param->dest_mac, send_param->buffer, send_param->len);
                 if (ret != ESP_OK)
                 {
                     ESP_LOGE(pcTaskGetName(0), "<%s> Send firmware node , size: %u, data: %.*s",
                              esp_err_to_name(ret), size, size, data);
                     free(data);
-                    send_ota_info(sample_ota.ota_destination_mac, ESPNOW_STATUS_OTA_ABORT_FIRMWARE_DOWNLOAD);
+                    send_ota_info(http_ota_server.ota_destination_mac, ESPNOW_STATUS_OTA_ABORT_FIRMWARE_DOWNLOAD);
                     errHTTPclient_deinit();
                     vTaskDelete(NULL);
                 }
@@ -819,8 +818,8 @@ static void ota_firmware_task(void *Data)
                 // update OTA node download status
                 if ((buf.sequence % 75) == 0)
                 {
-                    sprintf(ota_status, "OTA dw %dK",buf.sequence * OTA_DATA_PAYLOAD_LEN / 1024) ;                 
-                    send_mqtt_ota_status(ota_status, sample_ota.node_id);                  
+                    sprintf(ota_status, "OTA dw %dK",buf.sequence * MAX_OTA_PAYLOAD_LEN / 1024) ;                 
+                    send_mqtt_ota_status(ota_status, http_ota_server.node_id);                  
                 }
 
             }
@@ -828,7 +827,7 @@ static void ota_firmware_task(void *Data)
             {
                 ESP_LOGE(pcTaskGetName(0), "OTA ack timeout. OTA abort");
                 free(data);
-                send_ota_info(sample_ota.ota_destination_mac, ESPNOW_STATUS_OTA_ABORT_FIRMWARE_DOWNLOAD);
+                send_ota_info(http_ota_server.ota_destination_mac, ESPNOW_STATUS_OTA_ABORT_FIRMWARE_DOWNLOAD);
                 errHTTPclient_deinit();
                 vTaskDelete(NULL);
             }
@@ -838,7 +837,7 @@ static void ota_firmware_task(void *Data)
         {
             ESP_LOGW(pcTaskGetName(0), "<%s> esp_http_client_read", esp_err_to_name(ret));
             free(data);
-            send_ota_info(sample_ota.ota_destination_mac, ESPNOW_STATUS_OTA_ABORT_FIRMWARE_DOWNLOAD);
+            send_ota_info(http_ota_server.ota_destination_mac, ESPNOW_STATUS_OTA_ABORT_FIRMWARE_DOWNLOAD);
             errHTTPclient_deinit();
             vTaskDelete(NULL);
         }
@@ -847,8 +846,8 @@ static void ota_firmware_task(void *Data)
     ESP_LOGI(pcTaskGetName(0), "The service download firmware is complete, Spend time: %" PRIu32 "s",
              (xTaskGetTickCount() - start_time) * portTICK_PERIOD_MS / 1000);
     vTaskDelay(200 / portTICK_PERIOD_MS);
-    send_ota_info(sample_ota.ota_destination_mac, ESPNOW_STATUS_OTA_END_FIRMWARE_DOWNLOAD);
-    send_mqtt_ota_status("OTA dw OK!", sample_ota.node_id);
+    send_ota_info(http_ota_server.ota_destination_mac, ESPNOW_STATUS_OTA_END_FIRMWARE_DOWNLOAD);
+    send_mqtt_ota_status("OTA dw OK!", http_ota_server.node_id);
     free(data);
     esp_http_client_close(HTTPclient);
     esp_http_client_cleanup(HTTPclient);
@@ -901,7 +900,8 @@ void mqtt_sub(void *pvParameters)
                 strcpy(rcv_data.payload, mqttBuf_rx.data);
                 memcpy(send_param->dest_mac, destination_mac, ESP_NOW_ETH_ALEN);
                 send_param->buffer = (uint8_t *)&rcv_data;
-                send_param->len = sizeof(espnow_mqtt_data_t);
+                //send_param->len = sizeof(espnow_mqtt_data_t);
+                send_param->len = offsetof(espnow_mqtt_data_t, payload) + (strlen(rcv_data.payload) +1);
                 if (esp_now_send(send_param->dest_mac, send_param->buffer,
                                  send_param->len) != ESP_OK)
                     ESP_LOGE(pcTaskGetName(0), "ESPNOW Send error ");

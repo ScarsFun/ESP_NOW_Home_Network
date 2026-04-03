@@ -11,9 +11,14 @@
 #define ESPNOW_H
 
 #define RTC_MAGIC 0xA5A5A5A5
+/*
+* MAX_OTA_PAYLOAD_LEN and MAX_MQTT_PAYLOAD_LEN must not exceed 1470 bytes subtracted 
+* of sizes of espnow_ota_data_t and espnow_mqtt_data_t structure members.
+* For ESP-NOW 2.0 (max 1470 bytes, requires ESP-IDF v5.4+)
+*/
+#define MAX_OTA_PAYLOAD_LEN                  1000
+#define MAX_MQTT_PAYLOAD_LEN                 180
 
-#define ESPNOW_PAYLOAD_LEN                  (230)
-#define MQTT_PAYLOAD_LEN                    (180)
 #define ESP_MQTT_CLIENT_PUBBLISH            "/ESP32/TX/"
 
 /**
@@ -70,9 +75,9 @@ typedef struct{
     uint8_t type;                       // < type of packet, ESPNOW_TYPE_OTA_DATA
     char node_id[8]; 
     uint16_t sequence;
-    uint8_t ota_chunk[230];
-    uint8_t ota_chunk_size;
+    uint16_t ota_chunk_size;
     uint8_t ota_chunk_crc;
+    uint8_t ota_chunk[MAX_OTA_PAYLOAD_LEN];
 } __attribute__((packed)) espnow_ota_data_t;
 
 /* User defined field of ESPNOW MQTT data in this example. */
@@ -80,7 +85,7 @@ typedef struct {
     uint8_t type;                       // < type of packet, ESPNOW_TYPE_MQTT_PUBBLISH 
   char node_id[8];  
   char topic[40];
-  char payload[180];
+  char payload[MAX_MQTT_PAYLOAD_LEN];
 } __attribute__((packed)) espnow_mqtt_data_t;
 
 typedef struct{
@@ -117,4 +122,11 @@ typedef struct {
     //uint32_t counter;
     //uint8_t ack_errors;
 } gw_rtc_t;
+
+typedef struct
+{
+    uint8_t ota_destination_mac[ESP_NOW_ETH_ALEN];
+    char url[100];
+    char node_id[8];
+} ota_server_data_t;
 #endif

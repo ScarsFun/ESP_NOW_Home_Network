@@ -2,10 +2,17 @@
  * @defgroup   ESPNOW_NODE ESPNOW NODE
  *
  * @brief      This file implements ESPNOW sender/receiver.
+ * This code is in the Public Domain (or CC0 licensed, at your option.)
  *
- * @author     FART ELECTRONICA
+ * Unless required by applicable law or agreed to in writing, this
+ * software is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied.
+ *
+ *
+ * @author     https://github.com/ScarsFun/ESP_NOW_Home_Network
  * @date       2023
  */
+
 
 #include <assert.h>
 #include <stdio.h>
@@ -40,6 +47,10 @@
 #include "my_espnow.h"
 
 #include "ESPNOW_ota.h"
+
+#if ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(5, 4, 0)
+#error "This project requires ESP-IDF v5.4 or higher!"
+#endif
 
 
 char *l_my_node_id; //  ID of the node stored in NVS
@@ -122,11 +133,14 @@ bool pubblish_mqqt_message(char *message)
     ESP_LOGI(pcTaskGetName(0), "mqtt pubblish");
     EventBits_t ack_bits;
     espnow_mqtt_data_t *buf = (espnow_mqtt_data_t *)send_param->buffer;
-    assert(send_param->len = sizeof(espnow_mqtt_data_t));
+    //assert(send_param->len = sizeof(espnow_mqtt_data_t));
     buf->type = ESPNOW_TYPE_MQTT_PUBBLISH;
     strcpy(buf->topic, ESP_MQTT_CLIENT_PUBBLISH);
     strcpy(buf->payload, message);
     strcpy(buf->node_id, l_my_node_id);
+    send_param->len = offsetof(espnow_mqtt_data_t, payload) + (strlen(message) +1);
+    ESP_LOGI(pcTaskGetName(0), "type: %d topic: %s payload: %s NodeID: %s Len: %d"
+            , ESPNOW_TYPE_MQTT_PUBBLISH, ESP_MQTT_CLIENT_PUBBLISH, message, l_my_node_id, send_param->len  );
 
     if (esp_now_send(send_param->dest_mac, send_param->buffer,
                      send_param->len) != ESP_OK)

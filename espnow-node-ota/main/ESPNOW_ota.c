@@ -33,7 +33,7 @@ void espnow_send_ota_info(espnow_ota_type_t message_type, espnow_status_id_t sta
 
 void ota_firmware_store_task(void *pvParameters)
 {
-#define BUFFSIZE 920
+#define BUFFSIZE (MAX_OTA_PAYLOAD_LEN * 4)
   //ESP_ERROR_CHECK( heap_trace_start(HEAP_TRACE_LEAKS) );
   esp_err_t err;
   espnow_ota_data_t recv_ota_data;
@@ -77,7 +77,7 @@ void ota_firmware_store_task(void *pvParameters)
   while (1) {
     EventBits_t uxBits = xEventGroupWaitBits(ota_status_group,
                          OTA_GET_FW_BIT | OTA_ABORT_FW_BIT | OTA_END_FW_BIT,
-                         pdTRUE, pdFALSE, 2500 / portTICK_PERIOD_MS);
+                         pdTRUE, pdFALSE, 1500 / portTICK_PERIOD_MS);
     //ESP_LOGI(pcTaskGetName(0), "uxBits %lu", uxBits);
     
     if ( ( uxBits & OTA_ABORT_FW_BIT ) != 0 )
@@ -106,7 +106,7 @@ void ota_firmware_store_task(void *pvParameters)
         //ESP_LOGI(pcTaskGetName(0), "ota_write_data_sequence %d", ota_write_data_sequence);
         memcpy (ota_write_data + ota_write_data_size, recv_ota_data.ota_chunk,  recv_ota_data.ota_chunk_size);
          //printf("ota store stack free %d\n", uxTaskGetStackHighWaterMark(NULL));
-         ESP_LOGI(pcTaskGetName(0), " OTA free heap: %zu", free_heap);
+         //ESP_LOGI(pcTaskGetName(0), " OTA free heap: %zu", free_heap);
         ota_write_data_size += recv_ota_data.ota_chunk_size;
         ota_write_data_sequence ++;
         //ESP_LOGI(pcTaskGetName(0), "ota data partial size = %d", ota_write_data_size);
