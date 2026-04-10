@@ -2,8 +2,8 @@
 
 ## ESP-NOW Home Network, OTA, Bidirectional Gateway, MQTT NODERED  
 This is my attempt to build a Home Nework with bidirectional gateway with ESP-IDF framework.<br>
-Needs ESP-NOW 2.0. Needs ESP-IDF v5.4+
-Peers channel discovery finding gateway<br>
+Needs ESP-NOW 2.0. Needs ESP-IDF v5.4+<br>
+Peers channel discovery for gateway<br>
 OTA Peers update. Not fully tested<br>
 MQTT NODERED.<br>
 for the gateway tested ESP32-C3-MINI-1 chinese devboard.<br>
